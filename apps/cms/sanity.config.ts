@@ -7,8 +7,9 @@ export default defineConfig({
   name: 'default',
   title: 'black-koala',
 
-  projectId: '9f08k1c6',
-  dataset: 'development',
+  // TODO: validate with zod
+  projectId: process.env.SANITY_STUDIO_PROJECT_ID || '',
+  dataset: process.env.SANITY_STUDIO_DATASET || '',
 
   plugins: [deskTool(), visionTool()],
 

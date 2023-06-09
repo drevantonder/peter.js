@@ -1,4 +1,11 @@
 {
   "editor.tabSize": 2,
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "eslint.format.enable": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "eslint.packageManager": "pnpm",
   "prettier.prettierPath": "./node_modules/prettier"
 }
