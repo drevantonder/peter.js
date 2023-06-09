@@ -7,5 +7,14 @@
     "source.fixAll.eslint": true
   },
   "eslint.packageManager": "pnpm",
-  "prettier.prettierPath": "./node_modules/prettier"
+  "prettier.prettierPath": "./node_modules/prettier",
+  "eslint.workingDirectories": [
+    {
+      "pattern": "'./apps/*/"
+    },
+    {
+      "pattern": "'./packages/*/"
+    },
+    "."
+  ]
 }
