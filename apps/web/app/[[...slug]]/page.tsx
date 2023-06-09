@@ -4,11 +4,11 @@ import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
 type Props = {
-  params: { slug?: string }
+  params: { slug: string[] | undefined }
 }
 
 async function getPage(slug?: string) {
-  const query = groq`*[_type == "page" && (!defined($slug) && !defined(slug)) || (slug.current == $slug)][0]{
+  const query = groq`*[_type == "page" && ((!defined($slug) && !defined(slug)) || (slug.current == $slug))][0]{
     title,
     body
   }`
@@ -23,15 +23,15 @@ async function getPage(slug?: string) {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const page = await getPage(params.slug)
+  const page = await getPage(params.slug?.[0])
 
   return {
     title: page.title,
   }
 }
 
-export default async function Page({ params }: { params: { slug?: string } }) {
-  const page = await getPage(params.slug)
+export default async function Page({ params }: Props) {
+  const page = await getPage(params.slug?.[0])
 
   return (
     <>
