@@ -24,6 +24,46 @@ importers:
         specifier: latest
         version: 1.10.2
 
+  apps/cms:
+    dependencies:
+      '@sanity/vision':
+        specifier: ^3.12.0
+        version: 3.12.0(@babel/runtime@7.21.5)(@codemirror/lint@6.2.2)(@codemirror/state@6.2.1)(@codemirror/theme-one-dark@6.1.2)(@lezer/common@1.0.3)(codemirror@6.0.1)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.9)
+      react:
+        specifier: ^18.2.0
+        version: 18.2.0
+      react-dom:
+        specifier: ^18.2.0
+        version: 18.2.0(react@18.2.0)
+      react-is:
+        specifier: ^18.2.0
+        version: 18.2.0
+      sanity:
+        specifier: ^3.12.0
+        version: 3.12.0(@types/node@17.0.45)(@types/react@18.2.5)(react-dom@18.2.0)(react@18.2.0)(styled-components@5.3.9)
+      styled-components:
+        specifier: ^5.3.9
+        version: 5.3.9(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
+    devDependencies:
+      '@sanity/eslint-config-studio':
+        specifier: ^2.0.1
+        version: 2.0.1(eslint@8.6.0)(typescript@4.9.5)
+      '@types/react':
+        specifier: ^18.0.25
+        version: 18.2.5
+      '@types/styled-components':
+        specifier: ^5.1.26
+        version: 5.1.26
+      eslint:
+        specifier: ^8.6.0
+        version: 8.6.0
+      prettier:
+        specifier: ^2.8.8
+        version: 2.8.8
+      typescript:
+        specifier: ^4.9.5
+        version: 4.9.5
+
   apps/web:
     dependencies:
       next:
@@ -73,46 +113,6 @@ importers:
         specifier: 7.28.0
         version: 7.28.0(eslint@8.6.0)
 
-  packages/sanity:
-    dependencies:
-      '@sanity/vision':
-        specifier: ^3.12.0
-        version: 3.12.0(@babel/runtime@7.21.5)(@codemirror/lint@6.2.2)(@codemirror/state@6.2.1)(@codemirror/theme-one-dark@6.1.2)(@lezer/common@1.0.3)(codemirror@6.0.1)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.3.9)
-      react:
-        specifier: ^18.2.0
-        version: 18.2.0
-      react-dom:
-        specifier: ^18.2.0
-        version: 18.2.0(react@18.2.0)
-      react-is:
-        specifier: ^18.2.0
-        version: 18.2.0
-      sanity:
-        specifier: ^3.12.0
-        version: 3.12.0(@types/node@17.0.45)(@types/react@18.2.5)(react-dom@18.2.0)(react@18.2.0)(styled-components@5.3.9)
-      styled-components:
-        specifier: ^5.3.9
-        version: 5.3.9(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
-    devDependencies:
-      '@sanity/eslint-config-studio':
-        specifier: ^2.0.1
-        version: 2.0.1(eslint@8.6.0)(typescript@4.9.5)
-      '@types/react':
-        specifier: ^18.0.25
-        version: 18.2.5
-      '@types/styled-components':
-        specifier: ^5.1.26
-        version: 5.1.26
-      eslint:
-        specifier: ^8.6.0
-        version: 8.6.0
-      prettier:
-        specifier: ^2.8.8
-        version: 2.8.8
-      typescript:
-        specifier: ^4.9.5
-        version: 4.9.5
-
   packages/tsconfig: {}
 
   packages/ui:
@@ -146,7 +146,7 @@ packages:
     engines: {node: '>=6.0.0'}
     dependencies:
       '@jridgewell/gen-mapping': 0.3.3
-      '@jridgewell/trace-mapping': 0.3.9
+      '@jridgewell/trace-mapping': 0.3.18
 
   /@babel/code-frame@7.12.11:
     resolution: {integrity: sha512-Zt1yodBx1UcyiePMSkWnU4hPqhwq7hGi2nFL1LeA3EUl+q2LQx16MISgJ0+z7dnmgvP9QtIleuETGOiOH1RcIw==}
@@ -2146,6 +2146,7 @@ packages:
   /@jridgewell/resolve-uri@3.1.1:
     resolution: {integrity: sha512-dSYZh7HhCDtCKm4QakX0xFpsRDqjjtZf/kjI/v3T3Nwt5r8/qz/M19F9ySyOqU94SXBmeG9ttTul+YnR4LOxFA==}
     engines: {node: '>=6.0.0'}
+    dev: true
 
   /@jridgewell/set-array@1.1.2:
     resolution: {integrity: sha512-xnkseuNADM0gt2bs+BvhO0p78Mk762YnZdsuzFV018NoG1Sj1SCQvpSqa7XUaTam5vAGasABV9qXASMKnFMwMw==}
@@ -2168,6 +2169,7 @@ packages:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.1
       '@jridgewell/sourcemap-codec': 1.4.15
+    dev: true
 
   /@juggle/resize-observer@3.4.0:
     resolution: {integrity: sha512-dfLbk+PwWvFzSxwk3n5ySL0hfBog779o8h68wK/7/APo/7cgyWp5jcXockbxdk5kFRkbeXWm4Fbi9FrdN381sA==}
@@ -4712,7 +4714,7 @@ packages:
       escape-string-regexp: 4.0.0
       eslint-scope: 7.2.0
       eslint-utils: 3.0.0(eslint@8.6.0)
-      eslint-visitor-keys: 3.4.0
+      eslint-visitor-keys: 3.4.1
       espree: 9.5.2
       esquery: 1.5.0
       esutils: 2.0.3
@@ -6731,6 +6733,7 @@ packages:
   /prettier@2.8.8:
     resolution: {integrity: sha512-tdN8qQGvNjw4CHbY+XXk0JgCXn9QiF21a55rBe5LJAU+kDyC4WQn4+awm2Xfk2lQMk5fKup9XgzTZtGkjBdP9Q==}
     engines: {node: '>=10.13.0'}
+    hasBin: true
     dev: true
 
   /pretty-ms@7.0.1:
