@@ -1,5 +1,6 @@
 import { createClient } from 'next-sanity'
 import { cache } from 'react'
+import imageUrlBuilder from '@sanity/image-url'
 
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET
@@ -15,3 +16,5 @@ export const sanityClient = createClient({
 export const sanityClientFetch = cache<typeof sanityClient.fetch>(
   sanityClient.fetch.bind(sanityClient)
 )
+
+export const sanityImagebuilder = imageUrlBuilder(sanityClient)
