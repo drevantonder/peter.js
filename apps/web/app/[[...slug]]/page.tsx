@@ -2,6 +2,7 @@ import groq from 'groq'
 import { sanityClientFetch } from '../sanity'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
+import { Hero } from '../components/hero'
 
 type Props = {
   params: { slug: string[] | undefined }
@@ -35,8 +36,7 @@ export default async function Page({ params }: Props) {
 
   return (
     <>
-      <h1 className="text-6xl">{page.body[0].title}</h1>
-      <h2>{page.body[0].subtitle}</h2>
+      <Hero content={page.body[0]} />
     </>
   )
 }
