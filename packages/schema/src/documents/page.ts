@@ -1,6 +1,6 @@
-import {defineType} from 'sanity'
+import { defineType } from 'sanity'
 
-export default defineType({
+export const pageSchema = defineType({
   name: 'page',
   title: 'Page',
   type: 'document',
@@ -19,7 +19,7 @@ export default defineType({
       name: 'body',
       type: 'array',
       title: 'Body',
-      of: [{type: 'hero'}],
+      of: [{ type: 'hero' }],
     },
   ],
 })

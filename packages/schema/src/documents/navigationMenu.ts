@@ -1,6 +1,6 @@
-import {defineType} from 'sanity'
+import { defineType } from 'sanity'
 
-export default defineType({
+export const navigationMenuSchema = defineType({
   name: 'navigationMenu',
   title: 'Navigation Menu',
   type: 'document',
@@ -16,8 +16,8 @@ export default defineType({
       title: 'Position',
       options: {
         list: [
-          {title: 'Header', value: 'header'},
-          {title: 'Footer', value: 'footer'},
+          { title: 'Header', value: 'header' },
+          { title: 'Footer', value: 'footer' },
         ],
       },
     },
@@ -25,7 +25,7 @@ export default defineType({
       name: 'items',
       type: 'array',
       title: 'Items',
-      of: [{type: 'navigationItem'}],
+      of: [{ type: 'navigationItem' }],
     },
   ],
 })

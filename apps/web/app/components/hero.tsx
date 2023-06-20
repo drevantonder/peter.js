@@ -1,31 +1,7 @@
-import { q, sanityImage, type Selection, type TypeFromSelection } from 'groqd'
+import { Hero } from 'schema'
 import { SanityImage } from './SanityImage'
 
-export const heroSelection = {
-  title: q.string(),
-  subtitle: q.string(),
-  ctas: q
-    .array(
-      q.object({
-        title: q.string(),
-        link: q.string().url(),
-      })
-    )
-    .nullable(),
-  image: sanityImage('image', {
-    withHotspot: true,
-    isList: false,
-    additionalFields: {
-      alt: q.string(),
-    },
-  }).nullable(),
-} satisfies Selection
-
-type Props = {
-  content: TypeFromSelection<typeof heroSelection>
-}
-
-export function Hero({ content }: Props) {
+export function HeroBlock({ content }: { content: Hero }) {
   return (
     <div className="relative aspect-video flex items-center justify-center">
       {content.image && (
@@ -42,9 +18,11 @@ export function Hero({ content }: Props) {
         <h1 className="text-6xl font-extrabold text-neutral-900">
           {content.title}
         </h1>
-        <h2 className="text-2xl font-semibold text-neutral-800">
-          {content.subtitle}
-        </h2>
+        {content.subtitle && (
+          <h2 className="text-2xl font-semibold text-neutral-800">
+            {content.subtitle}
+          </h2>
+        )}
         {content.ctas && (
           <ul>
             {content.ctas.map((cta, index) => (

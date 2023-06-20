@@ -1,6 +1,6 @@
-import {defineType} from 'sanity'
+import { defineType } from 'sanity'
 
-export default defineType({
+export const navigationItemSchema = defineType({
   name: 'navigationItem',
   title: 'Navigation Item',
   type: 'object',

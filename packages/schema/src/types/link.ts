@@ -1,6 +1,6 @@
-import {defineField, defineType} from 'sanity'
+import { defineField, defineType } from 'sanity'
 
-export default defineType({
+export const linkSchema = defineType({
   name: 'link',
   title: 'Link',
   type: 'object',
@@ -17,15 +17,15 @@ export default defineType({
       name: 'internalLink',
       description: 'Select pages for navigation',
       type: 'reference',
-      to: [{type: 'page'}],
-      hidden: ({parent}) => parent?.isExternal,
+      to: [{ type: 'page' }],
+      hidden: ({ parent }) => parent?.isExternal,
     }),
     defineField({
       name: 'externalUrl',
       title: 'External URL',
       description: 'Use fully qualified URLS for external link',
       type: 'url',
-      hidden: ({parent}) => !parent?.isExternal,
+      hidden: ({ parent }) => !parent?.isExternal,
     }),
   ],
 })

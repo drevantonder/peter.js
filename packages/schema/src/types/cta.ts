@@ -1,6 +1,6 @@
-import {defineType} from 'sanity'
+import { defineType } from 'sanity'
 
-export default defineType({
+export const ctaSchema = defineType({
   name: 'cta',
   type: 'object',
   title: 'Call to action',

@@ -12,13 +12,14 @@
     "@portabletext/react": "^3.0.2",
     "@sanity/client": "^6.1.2",
     "@sanity/image-url": "^1.0.2",
+    "cms": "workspace:*",
     "groq": "^3.12.0",
     "groqd": "^0.15.6",
     "next": "^13.4.4",
     "next-sanity": "^4.3.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "ui": "workspace:*"
+    "schema": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^17.0.12",
