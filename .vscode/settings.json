@@ -8,14 +8,5 @@
   },
   "eslint.packageManager": "pnpm",
   "prettier.prettierPath": "./node_modules/prettier",
-  "eslint.workingDirectories": [
-    {
-      "pattern": "'./apps/*/"
-    },
-    {
-      "pattern": "'./packages/*/"
-    },
-    "."
-  ],
   "typescript.tsdk": "apps/web/node_modules/typescript/lib"
 }
