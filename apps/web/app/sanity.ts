@@ -1,6 +1,7 @@
 import { createClient } from 'next-sanity'
 import { cache } from 'react'
 import imageUrlBuilder from '@sanity/image-url'
+import { makeSafeQueryRunner } from 'groqd'
 
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET
@@ -18,3 +19,8 @@ export const sanityClientFetch = cache<typeof sanityClient.fetch>(
 )
 
 export const sanityImagebuilder = imageUrlBuilder(sanityClient)
+
+export const safeSanityFetch = makeSafeQueryRunner(
+  (query: string, params: Record<string, number | string | null> = {}) =>
+    sanityClientFetch(query, params)
+)

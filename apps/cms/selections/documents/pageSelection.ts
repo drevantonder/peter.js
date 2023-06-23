@@ -1,4 +1,4 @@
-import {q, z, type Selection, type TypeFromSelection} from 'groqd'
+import {q, type Selection, type TypeFromSelection} from 'groqd'
 import {heroSelection, richTextSelection} from '..'
 
 export const pageSelection = {

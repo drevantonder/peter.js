@@ -1,19 +1,14 @@
-import { sanityClientFetch } from '../sanity'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { HeroBlock } from '../components/hero'
 import { pageSelection } from 'cms/selections'
 import { RichTextBlock } from '../components/richText'
-import { q, makeSafeQueryRunner } from 'groqd'
+import { q } from 'groqd'
+import { safeSanityFetch } from '../sanity'
 
 type Props = {
   params: { slug: string[] | undefined }
 }
-
-const runQuery = makeSafeQueryRunner(
-  (query: string, params: Record<string, number | string | null> = {}) =>
-    sanityClientFetch(query, params)
-)
 
 async function getPage(slug?: string) {
   const query = q('*')
@@ -21,12 +16,8 @@ async function getPage(slug?: string) {
       '_type == "page" && ((!defined($slug) && !defined(slug)) || (slug.current == $slug))'
     )
     .grab$(pageSelection)
-  // const query = groq`*[_type == "page" && ((!defined($slug) && !defined(slug)) || (slug.current == $slug))][0]{
-  //   title,
-  //   body
-  // }`
-
-  const pages = await runQuery(query, { slug: slug ?? '@' })
+  
+  const pages = await safeSanityFetch(query, { slug: slug ?? '@' })
   const page = pages[0]
 
   if (!page) {

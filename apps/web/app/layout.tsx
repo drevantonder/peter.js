@@ -1,10 +1,12 @@
 import type { Metadata } from 'next'
-import groq from 'groq'
-import { sanityClientFetch } from './sanity'
+import { safeSanityFetch } from './sanity'
 
 // These styles apply to every route in the application
 import './globals.css'
-import Link from 'next/link'
+
+import { CmsLink } from './components/cms/cmsLink'
+import { q } from 'groqd'
+import { navigationMenuSelection } from 'cms/selections'
 
 export const metadata: Metadata = {
   title: 'Peter.js',
@@ -16,12 +18,17 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const headerNavMenu = await sanityClientFetch(
-    groq`*[_type == "navigationMenu" && position == "header"][0]{ ..., "items": items[]{ ..., "link": link { ..., "internalLink": { "slug": internalLink->slug } } } }`
-  )
-  const footerNavMenu = await sanityClientFetch(
-    groq`*[_type == "navigationMenu" && position == "footer"][0]{ ..., "items": items[]{ ..., "link": link { ..., "internalLink": { "slug": internalLink->slug } } } }`
-  )
+  const headerNavMenu = (await safeSanityFetch(
+    q("*")
+      .filter('_type == "navigationMenu" && position == "header"')
+      .grab$(navigationMenuSelection)
+  ))[0]
+
+  const footerNavMenu = (await safeSanityFetch(
+    q("*")
+      .filter('_type == "navigationMenu" && position == "footer"')
+      .grab$(navigationMenuSelection)
+  ))[0]
 
   return (
     <html lang="en">
@@ -29,27 +36,10 @@ export default async function RootLayout({
         <header className="bg-white">
           <nav className="container mx-auto px-4 py-4 flex items-center">
             <ul className="flex space-x-8">
-              {headerNavMenu?.items?.map((item) => (
-                <li key={item._key}>
-                  {item._type == 'navigationItem' && item.link.isExternal && (
-                    <a
-                      href={item.link.externalUrl}
-                      className="text-neutral-900 font-semibold text-xl"
-                    >
-                      {item.title}
-                    </a>
-                  )}
-                  {item._type == 'navigationItem' && !item.link.isExternal && (
-                    <Link
-                      href={`/${
-                        item.link.internalLink.slug
-                          ? item.link.internalLink.slug.current
-                          : ''
-                      }`}
-                      className="text-neutral-900 font-semibold text-xl"
-                    >
-                      {item.title}
-                    </Link>
+              {headerNavMenu.items?.map((item, index) => (
+                <li key={index}>
+                  {item._type == 'navigationItem' && (
+                    <CmsLink content={item.link} className="text-neutral-900 font-semibold text-xl">{item.title}</CmsLink>
                   )}
                 </li>
               ))}
@@ -61,29 +51,11 @@ export default async function RootLayout({
           <div className="container mx-auto px-4 py-8 flex justify-center items-center flex-col">
             <nav>
               <ul className="flex items-center space-x-12">
-                {footerNavMenu?.items?.map((item) => (
-                  <li key={item._key}>
-                    {item._type == 'navigationItem' && item.link.isExternal && (
-                      <a
-                        href={item.link.externalUrl}
-                        className="text-neutral-600 text-sm"
-                      >
-                        {item.title}
-                      </a>
+                {footerNavMenu?.items?.map((item, index) => (
+                  <li key={index}>
+                    {item._type == 'navigationItem' && (
+                      <CmsLink content={item.link} className="text-neutral-600 text-sm">{item.title}</CmsLink>
                     )}
-                    {item._type == 'navigationItem' &&
-                      !item.link.isExternal && (
-                        <Link
-                          href={`/${
-                            item.link.internalLink.slug
-                              ? item.link.internalLink.slug.current
-                              : ''
-                          }`}
-                          className="text-neutral-600 text-sm"
-                        >
-                          {item.title}
-                        </Link>
-                      )}
                   </li>
                 ))}
               </ul>
