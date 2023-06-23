@@ -1,20 +1,33 @@
-import groq from 'groq'
 import { sanityClientFetch } from '../sanity'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { HeroBlock } from '../components/hero'
+import { pageSelection } from 'cms/selections'
+import { RichTextBlock } from '../components/richText'
+import { q, makeSafeQueryRunner } from 'groqd'
 
 type Props = {
   params: { slug: string[] | undefined }
 }
 
-async function getPage(slug?: string) {
-  const query = groq`*[_type == "page" && ((!defined($slug) && !defined(slug)) || (slug.current == $slug))][0]{
-    title,
-    body
-  }`
+const runQuery = makeSafeQueryRunner(
+  (query: string, params: Record<string, number | string | null> = {}) =>
+    sanityClientFetch(query, params)
+)
 
-  const page = await sanityClientFetch(query, { slug: slug || null })
+async function getPage(slug?: string) {
+  const query = q('*')
+    .filter(
+      '_type == "page" && ((!defined($slug) && !defined(slug)) || (slug.current == $slug))'
+    )
+    .grab$(pageSelection)
+  // const query = groq`*[_type == "page" && ((!defined($slug) && !defined(slug)) || (slug.current == $slug))][0]{
+  //   title,
+  //   body
+  // }`
+
+  const pages = await runQuery(query, { slug: slug ?? '@' })
+  const page = pages[0]
 
   if (!page) {
     notFound()
@@ -31,12 +44,25 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
+const sanityTypeToComponent = {
+  hero: HeroBlock,
+  richText: RichTextBlock,
+}
+
 export default async function Page({ params }: Props) {
   const page = await getPage(params.slug?.[0])
 
   return (
     <>
-      <HeroBlock content={page.body[0]} />
+      {page.body.map((block, index) => {
+        const Component = sanityTypeToComponent[block._type]
+
+        if (!Component) {
+          return null
+        }
+
+        return <Component key={index} content={block} />
+      })}
     </>
   )
 }

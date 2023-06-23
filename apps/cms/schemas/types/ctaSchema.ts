@@ -1,4 +1,4 @@
-import { defineType } from 'sanity'
+import {defineType} from 'sanity'
 
 export const ctaSchema = defineType({
   name: 'cta',
@@ -9,11 +9,13 @@ export const ctaSchema = defineType({
       name: 'title',
       type: 'string',
       title: 'Title',
+      validation: (Rule) => Rule.required(),
     },
     {
       name: 'link',
-      type: 'url',
+      type: 'link',
       title: 'Link',
+      validation: (Rule) => Rule.required(),
     },
   ],
 })

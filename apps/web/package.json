@@ -18,10 +18,10 @@
     "next": "^13.4.4",
     "next-sanity": "^4.3.3",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "schema": "workspace:*"
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@tailwindcss/typography": "^0.5.9",
     "@types/node": "^17.0.12",
     "@types/react": "^18.2.10",
     "@types/react-dom": "^18.2.4",

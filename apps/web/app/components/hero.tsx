@@ -1,4 +1,4 @@
-import { Hero } from 'schema'
+import { Hero } from 'cms/selections'
 import { SanityImage } from './SanityImage'
 
 export function HeroBlock({ content }: { content: Hero }) {
