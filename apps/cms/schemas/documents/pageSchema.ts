@@ -1,9 +1,11 @@
 import {defineType} from 'sanity'
+import {DocumentTextIcon} from '@sanity/icons'
 
 export const pageSchema = defineType({
   name: 'page',
   title: 'Page',
   type: 'document',
+  icon: DocumentTextIcon,
   preview: {
     select: {
       title: 'title',

@@ -1,9 +1,24 @@
 import { defineType } from 'sanity'
+import {StarIcon} from '@sanity/icons'
 
 export const heroSchema = defineType({
   name: 'hero',
   title: 'Hero',
   type: 'object',
+  icon: StarIcon,
+  preview: {
+    select: {
+      title: 'title',
+      media: 'image',
+    },
+    prepare({ title, media }) {
+      return {
+        title: title,
+        subtitle: 'Hero',
+        media: media,
+      }
+    },
+  },
   fields: [
     {
       name: 'title',
