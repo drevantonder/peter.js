@@ -3,6 +3,7 @@ import {deskTool} from 'sanity/desk'
 import {visionTool} from '@sanity/vision'
 import {schemas} from './schemas'
 import {groqdPlaygroundTool} from 'groqd-playground'
+import { deskStructure } from './deskStructure'
 
 export default defineConfig({
   name: 'default',
@@ -13,7 +14,11 @@ export default defineConfig({
   dataset: process.env.SANITY_STUDIO_DATASET || '',
 
   plugins: [
-    deskTool(),
+    deskTool(
+      {
+        structure: deskStructure,
+      }
+    ),
     visionTool(),
     groqdPlaygroundTool({
       defaultDataset: process.env.SANITY_STUDIO_DATASET || '',

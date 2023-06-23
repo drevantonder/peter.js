@@ -6,7 +6,9 @@ import './globals.css'
 
 import { CmsLink } from './components/cms/cmsLink'
 import { q } from 'groqd'
-import { navigationMenuSelection } from 'cms/selections'
+import { navigationMenuSelection, settingsSelection } from 'cms/selections'
+import Link from 'next/link'
+import { SanityImage } from './components/SanityImage'
 
 export const metadata: Metadata = {
   title: 'Peter.js',
@@ -18,6 +20,8 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const settings = (await safeSanityFetch(q('*').filter('_type == "settings"').grab$(settingsSelection)))[0]
+
   const headerNavMenu = (await safeSanityFetch(
     q("*")
       .filter('_type == "navigationMenu" && position == "header"')
@@ -35,11 +39,16 @@ export default async function RootLayout({
       <body>
         <header className="bg-white">
           <nav className="container mx-auto px-4 py-4 flex items-center">
-            <ul className="flex space-x-8">
+            <Link href="/" className="flex items-center space-x-2">
+              <SanityImage src={settings.logo.asset._ref} alt={settings.name} className="w-12 h-12" width={48} height={48} />
+              <span className="text-neutral-800 font-bold text-2xl tracking-tight">{settings.name}</span>
+            </Link>
+            
+            <ul className="ml-12 flex space-x-8">
               {headerNavMenu.items?.map((item, index) => (
                 <li key={index}>
                   {item._type == 'navigationItem' && (
-                    <CmsLink content={item.link} className="text-neutral-900 font-semibold text-xl">{item.title}</CmsLink>
+                    <CmsLink content={item.link} className="text-neutral-900 font-semibold text-2xl">{item.title}</CmsLink>
                   )}
                 </li>
               ))}
@@ -61,8 +70,11 @@ export default async function RootLayout({
               </ul>
             </nav>
             <p className="mt-6 text-center text-xs leading-5 text-gray-500">
-              &copy; 2023 Your Company, Inc. All rights reserved.
+              &copy; {(new Date()).getFullYear()} {settings.name}, Inc. All rights reserved.
             </p>
+            <Link href="/" className='mt-5'>
+              <SanityImage src={settings.logo.asset._ref} alt={settings.name} className="w-12 h-12" width={48} height={48} />
+            </Link> 
           </div>
         </footer>
       </body>
