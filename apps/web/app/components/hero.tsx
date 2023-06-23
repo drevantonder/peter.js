@@ -2,6 +2,7 @@ import { Hero } from 'cms/selections'
 import { SanityImage } from './SanityImage'
 import { CmsRichTextDescription } from './cms/cmsRichTextDescription'
 import { CmsLink } from './cms/cmsLink'
+import { Button } from './button'
 
 export function HeroBlock({ content }: { content: Hero }) {
   return (
@@ -26,10 +27,12 @@ export function HeroBlock({ content }: { content: Hero }) {
           </div>
         )}
         {content.ctas && (
-          <ul>
+          <ul className="flex items-center justify-center mt-8">
             {content.ctas.map((cta, index) => (
-              <li key={index}>
-                <CmsLink content={cta.link}>{cta.title}</CmsLink>
+              <li key={index} className="block">
+                <Button asChild>
+                  <CmsLink content={cta.link}>{cta.title}</CmsLink>
+                </Button>
               </li>
             ))}
           </ul>
