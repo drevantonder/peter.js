@@ -1,11 +1,13 @@
 import { Hero } from 'cms/selections'
 import { SanityImage } from './SanityImage'
+import { CmsRichTextDescription } from './cms/cmsRichTextDescription'
+import { CmsLink } from './cms/cmsLink'
 
 export function HeroBlock({ content }: { content: Hero }) {
   return (
     <div className="relative aspect-video flex items-center justify-center">
       {content.image && (
-        <div className="absolute inset-0 -z-10">
+        <div className="absolute inset-0 -z-10 brightness-75">
           <SanityImage
             src={content.image.asset._ref}
             alt={content.image.alt}
@@ -14,20 +16,20 @@ export function HeroBlock({ content }: { content: Hero }) {
           />
         </div>
       )}
-      <div className="bg-neutral-200/10 backdrop-blur rounded-lg overflow-clip p-8">
-        <h1 className="text-6xl font-extrabold text-neutral-900">
+      <div className="bg-neutral-100/75 backdrop-blur rounded-lg overflow-clip px-16 py-12 max-w-4xl">
+        <h1 className="text-6xl font-extrabold text-neutral-900 text-center">
           {content.title}
         </h1>
-        {content.subtitle && (
-          <h2 className="text-2xl font-semibold text-neutral-800">
-            {content.subtitle}
-          </h2>
+        {content.description && (
+          <div className="prose-lg mt-8 text-center">
+            <CmsRichTextDescription content={content.description} />
+          </div>
         )}
         {content.ctas && (
           <ul>
             {content.ctas.map((cta, index) => (
               <li key={index}>
-                <a href={cta.link}>{cta.title}</a>
+                <CmsLink content={cta.link}>{cta.title}</CmsLink>
               </li>
             ))}
           </ul>

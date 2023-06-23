@@ -1,10 +1,11 @@
 import {q, type Selection, type TypeFromSelection} from 'groqd'
 import {ctaSelection} from '..'
+import { richTextDescriptionType } from '..'
 
 export const heroSelection = {
   _type: q.literal('hero'),
   title: q.string(),
-  subtitle: q.string().optional(),
+  description: richTextDescriptionType,
   ctas: q('ctas').filter().grab$(ctaSelection),
   image: q("image").grab$({
     alt: q.string(),

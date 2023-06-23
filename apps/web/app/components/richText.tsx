@@ -3,7 +3,7 @@ import { PortableText } from '@portabletext/react'
 
 export function RichTextBlock({ content }: { content: RichText }) {
   return (
-    <div className="prose">
+    <div className="container mx-auto prose">
       <PortableText value={content.body} />
     </div>
   )
