@@ -1,4 +1,5 @@
 import { defineType } from "sanity";
+import fonts from '@googleforcreators/fonts/fonts.json'
 
 export const settingsSchema = defineType({
   name: 'settings',
@@ -16,6 +17,24 @@ export const settingsSchema = defineType({
       type: 'image',
       title: 'Church Logo',
       validation: (Rule) => Rule.required(),
-    }
+    },
+    {
+      name: 'displayFont',
+      type: 'string',
+      title: 'Display Font',
+      options: {
+        list: fonts.map((font) => font.family),
+      },
+      validation: (Rule) => Rule.required(),
+    },
+    {
+      name: 'bodyFont',
+      type: 'string',
+      title: 'Body Font',
+      options: {
+        list: fonts.map((font) => font.family),
+      },
+      validation: (Rule) => Rule.required(),
+    },
   ]
 })

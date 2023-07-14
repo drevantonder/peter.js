@@ -26,6 +26,9 @@ importers:
 
   apps/cms:
     dependencies:
+      '@googleforcreators/fonts':
+        specifier: ^0.1.202306211149
+        version: 0.1.202306211149
       '@sanity/icons':
         specifier: ^2.4.1
         version: 2.4.1(react@18.2.0)
@@ -78,6 +81,9 @@ importers:
 
   apps/web:
     dependencies:
+      '@googleforcreators/fonts':
+        specifier: ^0.1.202306211149
+        version: 0.1.202306211149
       '@portabletext/react':
         specifier: ^3.0.2
         version: 3.0.2(react@18.2.0)
@@ -2082,6 +2088,11 @@ packages:
       '@floating-ui/dom': 1.2.9
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
+
+  /@googleforcreators/fonts@0.1.202306211149:
+    resolution: {integrity: sha512-Sqcq5QhcnGDt/S+l+OZarAxP0DqowLBmP9/B0/14iCQseceQQqKvofvJ/GNTX+rZnISX7GymAOeL9J0kF5UByw==}
+    engines: {node: '>= 12 || >= 14 || >= 16 || >= 18', npm: '>= 7.3'}
+    dev: false
 
   /@humanwhocodes/config-array@0.5.0:
     resolution: {integrity: sha512-FagtKFz74XrTl7y6HCzQpwDfXP0yhxe9lHLD1UZxjvZIcbyRz8zTFF/yYNfSfzU414eDwZ1SrO0Qvtyf+wFMQg==}

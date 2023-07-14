@@ -18,7 +18,7 @@ export function HeroBlock({ content }: { content: Hero }) {
         </div>
       )}
       <div className="bg-neutral-100/75 backdrop-blur rounded-lg overflow-clip px-16 py-12 max-w-4xl">
-        <h1 className="text-6xl font-extrabold text-neutral-900 text-center">
+        <h1 className="text-6xl font-extrabold text-neutral-900 text-center font-display">
           {content.title}
         </h1>
         {content.description && (

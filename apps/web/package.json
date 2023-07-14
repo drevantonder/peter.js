@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@googleforcreators/fonts": "^0.1.202306211149",
     "@portabletext/react": "^3.0.2",
     "@radix-ui/react-slot": "^1.0.2",
     "@sanity/client": "^6.1.2",

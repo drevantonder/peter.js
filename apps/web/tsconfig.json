@@ -2,7 +2,9 @@
   "extends": "tsconfig/nextjs.json",
   "compilerOptions": {
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      // TODO: This felt unnecessary, but it was the only way I could get TS happy
+      "@googleforcreators/fonts/fonts.json": ["./node_modules/@googleforcreators/fonts/dist-module/fonts.json"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

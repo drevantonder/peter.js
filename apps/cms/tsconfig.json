@@ -13,7 +13,11 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "incremental": true
+    "incremental": true,
+    "paths": {
+      // TODO: This felt unnecessary, but it was the only way I could get TS happy
+      "@googleforcreators/fonts/fonts.json": ["./node_modules/@googleforcreators/fonts/dist-module/fonts.json"]
+    }
   },
   "include": ["**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
