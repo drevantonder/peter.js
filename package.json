@@ -1,18 +1,17 @@
 {
+  "name": "nuxt-app",
   "private": true,
+  "type": "module",
   "scripts": {
-    "build": "turbo run build",
-    "dev": "turbo run dev",
-    "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
   },
-  "devDependencies": {
-    "@turbo/gen": "^1.9.7",
-    "eslint": "^7.32.0",
-    "eslint-config-custom": "workspace:*",
-    "prettier": "^2.8.8",
-    "turbo": "latest"
-  },
-  "packageManager": "pnpm@7.15.0",
-  "name": "peter.js"
+  "dependencies": {
+    "nuxt": "^3.13.2",
+    "vue": "latest",
+    "vue-router": "latest"
+  }
 }
