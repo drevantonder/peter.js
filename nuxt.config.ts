@@ -2,7 +2,7 @@
 export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
   devtools: { enabled: true },
-  modules: ['@nuxthub/core', '@nuxt/ui'],
+  modules: ['@nuxthub/core', '@nuxt/ui', 'nuxt-auth-utils'],
   hub: {
     database: true
   },
