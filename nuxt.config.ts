@@ -5,5 +5,8 @@ export default defineNuxtConfig({
   modules: ['@nuxthub/core'],
   hub: {
     database: true
-  }
+  },
+  future: {
+    compatibilityVersion: 4,
+  },
 })
